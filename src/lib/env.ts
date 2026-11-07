@@ -23,6 +23,8 @@ const schema = z.object({
   EMAIL_FROM: z.string().default("Ledger <no-reply@ledger.local>"),
   /** 32-byte base64 key that encrypts broker API tokens at rest (AES-256-GCM). */
   TOKEN_ENCRYPTION_KEY: z.string().optional(),
+  /** Breached-password check via Have I Been Pwned (k-anonymity; only a 5-char hash prefix leaves the server). Keep on in production. */
+  PASSWORD_BREACH_CHECK: z.enum(["on", "off"]).default("on"),
 });
 
 export const env = schema.parse(process.env);

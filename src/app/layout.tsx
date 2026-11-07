@@ -1,8 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+/** Inter (variable, self-hosted): no third-party font request, cached with the app's own assets. */
+const inter = localFont({
+  src: [
+    { path: "../fonts/inter-latin-wght-normal.woff2", weight: "100 900", style: "normal" },
+    { path: "../fonts/inter-latin-ext-wght-normal.woff2", weight: "100 900", style: "normal" },
+  ],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: { default: "Ledger", template: "%s · Ledger" },

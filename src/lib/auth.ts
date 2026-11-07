@@ -88,7 +88,9 @@ export const auth = betterAuth({
       },
     }),
     passkey({ rpName: "Ledger" }),
-    haveIBeenPwned({ customPasswordCompromisedMessage: "This password has appeared in a data breach. Choose a different one." }),
+    ...(env.PASSWORD_BREACH_CHECK === "on"
+      ? [haveIBeenPwned({ customPasswordCompromisedMessage: "This password has appeared in a data breach. Choose a different one." })]
+      : []),
     nextCookies(), // must stay last
   ],
 });
