@@ -1,12 +1,14 @@
-.panel {
+/* Login brand panel. Namespaced global CSS (lg-bp-*): the Tailwind CSS loader in next.config treats all .css as global. */
+.lg-bp-panel {
   position: relative;
   overflow: hidden;
   background: #0a0a0a;
   color: #e7e7e7;
   min-height: 640px;
+  height: 100%;
 }
 
-.glow {
+.lg-bp-glow {
   position: absolute;
   right: -10%;
   bottom: -20%;
@@ -16,7 +18,7 @@
   pointer-events: none;
 }
 
-.copy {
+.lg-bp-copy {
   position: relative;
   z-index: 2;
   padding: 40px 56px 0;
@@ -25,7 +27,7 @@
   gap: 72px;
 }
 
-.headline {
+.lg-bp-headline {
   margin: 0;
   font-size: clamp(40px, 4vw, 56px);
   line-height: 1;
@@ -34,14 +36,14 @@
   color: #fff;
 }
 
-.stage {
+.lg-bp-stage {
   position: absolute;
   left: 56px;
   top: 270px;
   perspective: 2400px;
 }
 
-.screen {
+.lg-bp-screen {
   width: 980px;
   height: 640px;
   display: flex;
@@ -52,10 +54,10 @@
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 60px 120px -20px rgba(0, 0, 0, 0.8);
   transform-origin: 0 0;
   transform: rotateX(9deg) rotateY(-15deg) rotateZ(2.5deg);
-  animation: settle 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards;
+  animation: lg-bp-settle 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards;
 }
 
-.side {
+.lg-bp-side {
   width: 188px;
   flex: none;
   display: flex;
@@ -66,13 +68,13 @@
   border-right: 1px solid #1f1f1f;
 }
 
-.nav {
+.lg-bp-nav {
   padding: 9px 10px;
   font-size: 13px;
   color: #8d8d8d;
 }
 
-.navActive {
+.lg-bp-navActive {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -83,7 +85,7 @@
   color: #fff;
 }
 
-.main {
+.lg-bp-main {
   flex: 1;
   min-width: 0;
   display: flex;
@@ -92,7 +94,7 @@
   padding: 24px 26px;
 }
 
-.newTrade {
+.lg-bp-newTrade {
   display: flex;
   align-items: center;
   height: 30px;
@@ -104,7 +106,7 @@
   font-weight: 600;
 }
 
-.chip {
+.lg-bp-chip {
   padding: 6px 10px;
   border-radius: 999px;
   background: #1b1b1b;
@@ -113,13 +115,13 @@
   color: #bdbdbd;
 }
 
-.grid {
+.lg-bp-grid {
   display: grid;
   grid-template-columns: 1.55fr 1fr;
   gap: 14px;
 }
 
-.balance {
+.lg-bp-balance {
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -129,14 +131,14 @@
   background: linear-gradient(135deg, #f7f8be 0%, #ece85b 55%, #e4e33a 100%);
 }
 
-.balanceValue {
+.lg-bp-balanceValue {
   font-size: 42px;
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1.05;
 }
 
-.delta {
+.lg-bp-delta {
   align-self: flex-start;
   padding: 3px 8px;
   border-radius: 999px;
@@ -146,7 +148,7 @@
   color: #0a7c72;
 }
 
-.figure {
+.lg-bp-figure {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -156,7 +158,7 @@
   border: 1px solid #262626;
 }
 
-.calendar {
+.lg-bp-calendar {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -166,40 +168,40 @@
   border: 1px solid #262626;
 }
 
-.equity {
+.lg-bp-equity {
   stroke-dasharray: 640;
   stroke-dashoffset: 640;
-  animation: draw 1.6s cubic-bezier(0.65, 0, 0.35, 1) 0.9s forwards;
+  animation: lg-bp-draw 1.6s cubic-bezier(0.65, 0, 0.35, 1) 0.9s forwards;
 }
 
-.equityDot {
+.lg-bp-equityDot {
   opacity: 0;
-  animation: fade 0.4s ease 2.4s forwards;
+  animation: lg-bp-fade 0.4s ease 2.4s forwards;
 }
 
-@keyframes settle {
+@keyframes lg-bp-settle {
   from {
     opacity: 0;
     transform: translateY(60px) rotateX(20deg) rotateY(-26deg) rotateZ(4deg);
   }
 }
-@keyframes draw {
+@keyframes lg-bp-draw {
   to { stroke-dashoffset: 0; }
 }
-@keyframes fade {
+@keyframes lg-bp-fade {
   to { opacity: 1; }
 }
 
 /* Phones and narrow tablets: a short band with the headline only. */
 @media (max-width: 900px) {
-  .panel { min-height: 0; }
-  .copy { padding: 24px 22px 28px; gap: 28px; }
-  .headline { font-size: 36px; }
-  .stage { display: none; }
+  .lg-bp-panel { min-height: 0; }
+  .lg-bp-copy { padding: 24px 22px 28px; gap: 28px; }
+  .lg-bp-headline { font-size: 36px; }
+  .lg-bp-stage { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .screen { animation: none; }
-  .equity { animation: none; stroke-dashoffset: 0; }
-  .equityDot { animation: none; opacity: 1; }
+  .lg-bp-screen { animation: none; }
+  .lg-bp-equity { animation: none; stroke-dashoffset: 0; }
+  .lg-bp-equityDot { animation: none; opacity: 1; }
 }

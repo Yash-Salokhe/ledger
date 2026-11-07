@@ -23,7 +23,7 @@ export function AuthTabs() {
           {active === t.id ? (
             <motion.span
               layoutId="auth-tab"
-              className="absolute inset-0 -z-10 rounded-[10px] bg-card shadow-[0_1px_2px_rgba(0,0,0,0.08)]"
+              className="absolute inset-0 -z-10 rounded-[10px] bg-raised shadow-[0_1px_2px_rgba(0,0,0,0.08)]"
               transition={{ type: "spring", stiffness: 500, damping: 38 }}
             />
           ) : null}

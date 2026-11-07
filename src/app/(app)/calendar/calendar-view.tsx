@@ -61,7 +61,8 @@ export function CalendarView({ data }: { data: CalendarData }) {
       </dl>
 
       <div className="overflow-x-auto rounded-xl border border-line bg-card p-3 sm:p-4">
-        <table className="w-full min-w-[720px] border-separate border-spacing-[6px] text-sm" aria-label={`${title}, daily P&L`}>
+        <table className="w-full min-w-[720px] table-fixed border-separate border-spacing-[6px] text-sm" aria-label={`${title}, daily P&L`}>
+          <colgroup>{WEEKDAYS.map((d) => <col key={d} />)}<col className="w-[92px]" /></colgroup>
           <thead>
             <tr>{[...WEEKDAYS, "Week"].map((d) => <th key={d} scope="col" className="pb-1 text-left text-xs font-medium text-fg-3">{d}</th>)}</tr>
           </thead>

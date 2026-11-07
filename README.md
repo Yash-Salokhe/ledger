@@ -59,4 +59,5 @@ Emails (verification codes, magic links) print to the terminal until `RESEND_API
 | Journal | ✅ |
 | Settings: account, rules, override, export | ✅ |
 | Trade review (grade, checklist, emotions, notes autosave, edit numbers, chart link) | ✅ |
-| Performance, Weekly review, Calendar, Playbook, Import, Coach, Search | Next |
+| Playbook + strategy detail, Calendar, Performance | ✅ |
+| Weekly review, Import, Coach, Search | Next |
