@@ -18,7 +18,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   return (
     <Ctx value={show}>
       {children}
-      <div aria-live="polite" className="pointer-events-none fixed inset-x-0 bottom-6 z-50 flex justify-center px-4">
+      <div aria-live="polite" className="pointer-events-none fixed inset-x-0 bottom-24 z-50 md:bottom-6 flex justify-center px-4">
         <AnimatePresence>
           {toast ? (
             <motion.div key={toast.id} initial={{ y: 24, opacity: 0, scale: 0.96 }} animate={{ y: 0, opacity: 1, scale: 1, transition: { type: "spring", stiffness: 500, damping: 34 } }}

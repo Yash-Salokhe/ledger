@@ -18,7 +18,7 @@ const NAV = [
 
 export function Sidebar({ ungraded = 0 }: { ungraded?: number }) {
   return (
-    <nav aria-label="Main" className="flex w-full flex-col gap-1 bg-nav px-3 py-5 text-nav-fg md:sticky md:top-0 md:h-dvh md:w-[232px] md:flex-none">
+    <nav aria-label="Main" className="hidden flex-col gap-1 bg-nav px-3 py-5 text-nav-fg md:sticky md:top-0 md:flex md:h-dvh md:w-[232px] md:flex-none">
       <Link href="/dashboard" className="mb-5 flex items-center gap-2.5 px-2.5">
         <LedgerMark size={26} />
         <span className="flex flex-col leading-tight">
@@ -32,7 +32,7 @@ export function Sidebar({ ungraded = 0 }: { ungraded?: number }) {
         <ActiveNav ungraded={ungraded} />
       </Suspense>
 
-      <div className="mt-auto hidden flex-col gap-2 md:flex">
+      <div className="mt-auto flex flex-col gap-2">
         <Link href="/settings" className="flex h-10 items-center gap-3 rounded-[10px] px-2.5 text-sm text-nav-muted hover:text-nav-fg">
           <Settings size={17} aria-hidden /> Settings
         </Link>
@@ -48,7 +48,7 @@ function ActiveNav({ ungraded }: { ungraded: number }) {
 
 function NavList({ path, ungraded }: { path: string | null; ungraded: number }) {
   return (
-        <ul className="flex flex-row gap-1 overflow-x-auto md:flex-col">
+        <ul className="flex flex-col gap-1">
           {NAV.map(({ href, label, icon: Icon }) => {
             const active = path?.startsWith(href) ?? false;
             return (

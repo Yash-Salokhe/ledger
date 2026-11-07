@@ -112,8 +112,8 @@ export function StrategyEditor({ strategy: s }: { strategy: StrategyDetail }) {
                 {s.checklist.map((c) => (
                   <tr key={c.id} className="border-t border-line-subtle">
                     <td className="py-2.5 pr-3">{c.label}</td>
-                    <td className="num py-2.5 text-right">{c.metR === null ? "—" : <span className={c.metR >= 0 ? "text-profit" : "text-loss"}>{c.metR > 0 ? "+" : ""}{c.metR}R</span>} <span className="text-xs text-fg-3">({c.metN})</span></td>
-                    <td className="num py-2.5 text-right">{c.skipR === null ? "—" : <span className={c.skipR >= 0 ? "text-profit" : "text-loss"}>{c.skipR > 0 ? "+" : ""}{c.skipR}R</span>} <span className="text-xs text-fg-3">({c.skipN})</span></td>
+                    <td className="num whitespace-nowrap py-2.5 pl-4 text-right">{c.metR === null ? "—" : <span className={c.metR >= 0 ? "text-profit" : "text-loss"}>{c.metR > 0 ? "+" : ""}{c.metR}R</span>} <span className="text-xs text-fg-3">({c.metN})</span></td>
+                    <td className="num whitespace-nowrap py-2.5 pl-4 text-right">{c.skipR === null ? "—" : <span className={c.skipR >= 0 ? "text-profit" : "text-loss"}>{c.skipR > 0 ? "+" : ""}{c.skipR}R</span>} <span className="text-xs text-fg-3">({c.skipN})</span></td>
                   </tr>
                 ))}
               </tbody>

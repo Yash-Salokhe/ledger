@@ -4,6 +4,14 @@ A trading journal that grades your **process**, not just your P&L. Log trades fr
 
 > Portfolio project by Yash Salokhe. Designed in Figma, built with Next.js 16, PostgreSQL and Better Auth.
 
+| | |
+|---|---|
+| ![Sign in](docs/screenshots/sign-in.png) | ![Dashboard](docs/screenshots/dashboard.png) |
+| ![Performance (dark)](docs/screenshots/performance-dark.png) | ![Calendar](docs/screenshots/calendar.png) |
+| ![Trade review](docs/screenshots/trade-review.png) | ![Strategy](docs/screenshots/strategy.png) |
+
+<p align="center"><img src="docs/screenshots/dashboard-mobile.png" width="260" alt="Dashboard on a phone" /></p>
+
 ## What it does
 
 - **Process grades.** Every trade is *Earned it*, *Good loss*, *Lucky* or *Deserved it*, so a winning trade that broke the plan never inflates your stats.
@@ -44,6 +52,7 @@ Emails (verification codes, magic links) print to the terminal until `RESEND_API
 | `npm run test:db` | Integration tests against Postgres with RLS (server actions, rules, concurrency, isolation) |
 | `npm run typecheck` / `lint` | TypeScript, ESLint |
 | `npm run db:generate` / `db:migrate` | Drizzle migrations |
+| `node scripts/screenshots.mjs …` | Render pages of a running build in headless Chrome (visual check) |
 
 ## Deploy
 

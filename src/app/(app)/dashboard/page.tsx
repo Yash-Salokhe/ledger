@@ -110,13 +110,13 @@ async function DashboardContent() {
               </div>
               <ul className="divide-y divide-line-subtle">
                 {d.recent.map((t) => (
-                  <li key={t.id} className="flex items-center gap-4 py-3">
+                  <li key={t.id} className="flex items-center gap-3 py-3 sm:gap-4">
                     <Link href={`/trades/${t.id}`} className="w-24 font-semibold underline-offset-4 hover:underline">{t.symbol}</Link>
-                    <span className="w-14 text-sm capitalize text-fg-3">{t.side}</span>
-                    <span className="flex-1 text-sm text-fg-3">{new Date(t.openedAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>
-                    {t.grade ? <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${GRADE[t.grade].cls}`}>{GRADE[t.grade].label}</span>
-                      : <span className="rounded-full bg-citron-100 px-2.5 py-1 text-xs font-semibold text-citron-900">Needs grade</span>}
-                    <span className={`num w-28 text-right font-semibold ${Number(t.pnl) >= 0 ? "text-profit" : "text-loss"}`}>{money(Number(t.pnl ?? 0), d.account.currency, { sign: true })}</span>
+                    <span className="hidden w-14 text-sm capitalize text-fg-3 sm:block">{t.side}</span>
+                    <span className="flex-1 whitespace-nowrap text-sm text-fg-3">{new Date(t.openedAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>
+                    {t.grade ? <span className={`whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-semibold ${GRADE[t.grade].cls}`}>{GRADE[t.grade].label}</span>
+                      : <span className="whitespace-nowrap rounded-full bg-citron-100 px-2.5 py-1 text-xs font-semibold text-citron-900">Needs grade</span>}
+                    <span className={`num whitespace-nowrap text-right font-semibold sm:w-28 ${Number(t.pnl) >= 0 ? "text-profit" : "text-loss"}`}>{money(Number(t.pnl ?? 0), d.account.currency, { sign: true })}</span>
                   </li>
                 ))}
               </ul>

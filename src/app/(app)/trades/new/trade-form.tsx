@@ -30,7 +30,7 @@ export function TradeForm({ data, gate }: { data: TradeFormData; gate: { canTrad
 
   const [accountId, setAccountId] = useState(data.accounts[0]?.id ?? "");
   const [currency, setCurrency] = useState("INR");
-  const [instrumentId, setInstrumentId] = useState(data.instruments[0]?.id ?? "");
+  const [instrumentId, setInstrumentId] = useState(data.defaultInstrumentId ?? "");
   const [side, setSide] = useState<Side>("long");
   const [qty, setQty] = useState("1");
   const [entry, setEntry] = useState("");

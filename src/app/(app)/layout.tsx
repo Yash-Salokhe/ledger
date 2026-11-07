@@ -7,6 +7,9 @@ import { Sidebar } from "@/components/app/sidebar";
 import { NewTradeButton } from "@/components/app/new-trade-button";
 import { UserMenu } from "@/components/app/user-menu";
 import { ToastProvider } from "@/components/app/toast";
+import { MobileNav } from "@/components/app/mobile-nav";
+import { LedgerMark } from "@/components/ledger-mark";
+import Link from "next/link";
 
 /**
  * The shell (sidebar, search, page headings) is static and prerendered, so every
@@ -19,8 +22,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     <div className="flex min-h-dvh flex-col bg-page md:flex-row">
       <Sidebar />
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex flex-wrap items-center justify-end gap-3 px-6 pt-6 md:px-10">
-          <button type="button" className="flex h-10 w-full max-w-[280px] items-center gap-2 rounded-md border border-line bg-card px-3 text-sm text-fg-3 hover:border-line-hover">
+        <header className="flex items-center justify-end gap-3 px-4 pt-4 md:px-10 md:pt-6">
+          <Link href="/dashboard" aria-label="Ledger home" className="mr-auto md:hidden"><LedgerMark size={28} /></Link>
+          <button type="button" className="hidden h-10 w-full max-w-[280px] items-center gap-2 sm:flex rounded-md border border-line bg-card px-3 text-sm text-fg-3 hover:border-line-hover">
             <Search size={16} aria-hidden />
             <span className="flex-1 text-left">Search trades, plans, pages</span>
             <kbd className="rounded border border-line px-1.5 text-[11px]">⌘K</kbd>
@@ -29,8 +33,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <HeaderActions />
           </Suspense>
         </header>
-        <main className="flex-1 px-6 pb-12 pt-2 md:px-10">{children}</main>
+        <main className="flex-1 px-4 pb-28 pt-2 md:px-10 md:pb-12">{children}</main>
       </div>
+      <MobileNav />
     </div>
     </ToastProvider>
   );

@@ -60,11 +60,11 @@ export function CalendarView({ data }: { data: CalendarData }) {
         <Sum k="Days with broken rules" v={String(s.violationDays)} tone={s.violationDays ? "loss" : undefined} />
       </dl>
 
-      <div className="overflow-x-auto rounded-xl border border-line bg-card p-3 sm:p-4">
-        <table className="w-full min-w-[720px] table-fixed border-separate border-spacing-[6px] text-sm" aria-label={`${title}, daily P&L`}>
-          <colgroup>{WEEKDAYS.map((d) => <col key={d} />)}<col className="w-[92px]" /></colgroup>
+      <div className="rounded-xl border border-line bg-card p-2 sm:p-4">
+        <table className="w-full table-fixed border-separate border-spacing-[3px] text-sm sm:border-spacing-[6px]" aria-label={`${title}, daily P&L`}>
+          <colgroup>{WEEKDAYS.map((d) => <col key={d} />)}<col className="hidden w-[92px] sm:table-column" /></colgroup>
           <thead>
-            <tr>{[...WEEKDAYS, "Week"].map((d) => <th key={d} scope="col" className="pb-1 text-left text-xs font-medium text-fg-3">{d}</th>)}</tr>
+            <tr>{[...WEEKDAYS, "Week"].map((d) => <th key={d} scope="col" className={`pb-1 text-left text-xs font-medium text-fg-3 ${d === "Week" ? "hidden sm:table-cell" : ""}`}><span className="sm:hidden">{d === "Week" ? d : d[0]}</span><span className="hidden sm:inline">{d}</span></th>)}</tr>
           </thead>
           <tbody>
             {weeks.map((week, wi) => {
@@ -83,16 +83,16 @@ export function CalendarView({ data }: { data: CalendarData }) {
                       <motion.div
                         initial={reduce ? false : { opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.25, delay: reduce ? 0 : (wi * 7 + di) * 0.008 }}
-                        className={`relative flex h-[88px] flex-col justify-between rounded-lg p-2.5 ${d ? "" : "bg-subtle"} ${isToday ? "ring-2 ring-fg" : ""}`}
+                        className={`relative flex h-[56px] flex-col justify-between rounded-md p-1.5 sm:h-[88px] sm:rounded-lg sm:p-2.5 ${d ? "" : "bg-subtle"} ${isToday ? "ring-2 ring-fg" : ""}`}
                         style={d ? { background: tint(d.pnl, data.maxAbs) } : undefined}>
-                        <span className="num flex items-center justify-between text-xs text-fg-2">
+                        <span className="num flex items-center justify-between text-[11px] text-fg-2 sm:text-xs">
                           {Number(day.slice(8))}
-                          {d?.violations ? <ShieldAlert size={13} className="text-loss" aria-hidden /> : null}
+                          {d?.violations ? <ShieldAlert size={12} className="text-loss" aria-hidden /> : null}
                         </span>
                         {d ? (
                           <span className="flex flex-col">
-                            <span className={`num text-[15px] font-bold ${d.pnl >= 0 ? "text-profit" : "text-loss"}`}>{compact(d.pnl, ccy)}</span>
-                            <span className="text-[11px] text-fg-2">{d.trades} trade{d.trades === 1 ? "" : "s"}{d.r ? ` · ${d.r > 0 ? "+" : ""}${d.r.toFixed(1)}R` : ""}</span>
+                            <span className={`num text-[11px] font-bold sm:text-[15px] ${d.pnl >= 0 ? "text-profit" : "text-loss"}`}>{compact(d.pnl, ccy)}</span>
+                            <span className="hidden text-[11px] text-fg-2 sm:block">{d.trades} trade{d.trades === 1 ? "" : "s"}{d.r ? ` · ${d.r > 0 ? "+" : ""}${d.r.toFixed(1)}R` : ""}</span>
                           </span>
                         ) : null}
                       </motion.div>
@@ -104,7 +104,7 @@ export function CalendarView({ data }: { data: CalendarData }) {
                       </td>
                     );
                   })}
-                  <td className="p-0 align-top">
+                  <td className="hidden p-0 align-top sm:table-cell">
                     <div className="flex h-[88px] flex-col justify-end rounded-lg border border-line-subtle p-2.5">
                       {wk.length ? <span className={`num text-sm font-bold ${wsum >= 0 ? "text-profit" : "text-loss"}`}>{compact(wsum, ccy)}</span> : <span className="text-xs text-fg-3">—</span>}
                     </div>
