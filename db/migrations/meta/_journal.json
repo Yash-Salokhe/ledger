@@ -15,6 +15,13 @@
       "when": 1794034918254,
       "tag": "0001_security",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794035714539,
+      "tag": "0002_seed_instruments",
+      "breakpoints": true
     }
   ]
 }

@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ledger
 
-## Getting Started
+A trading journal that grades your **process**, not just your P&L. Log trades from any market (NSE, NASDAQ, FX, crypto), set rules for yourself, and see whether your results came from following the plan or from luck.
 
-First, run the development server:
+> Portfolio project by Yash Salokhe. Designed in Figma, built with Next.js 16, PostgreSQL and Better Auth.
+
+## What it does
+
+- **Process grades.** Every trade is *Earned it*, *Good loss*, *Lucky* or *Deserved it*, so a winning trade that broke the plan never inflates your stats.
+- **Rules you can't quietly break.** Set a max trades per day, a daily loss limit, a trading window or a risk cap. When you hit one, **New trade locks**. You can override it for the day in Settings, but Ledger warns you and records the override in your weekly review.
+- **Any market.** Instruments carry their exchange (ISO 10383), asset class, currency and lot size. Each trading account has its own currency; INR uses lakh grouping.
+- **Ledger Coach** (in progress): an AI that reads your journal through read-only views and answers questions like "Why did September lose?".
+
+## Stack
+
+| Layer | Choice | Why |
+|---|---|---|
+| Web | Next.js 16 (App Router, Cache Components, Partial Prerendering) | Static shell from the CDN, data streams in. ~6 ms TTFB locally |
+| UI | Tailwind v4 with tokens from the Figma Foundations, Motion | One source of truth for light and dark themes |
+| Auth | Better Auth (self-hosted) | Email + password, Google, Apple, magic link, passkeys, email codes; no per-user fees, data stays in our DB |
+| Database | PostgreSQL 16 + Drizzle ORM | Row-level security, numeric money, JSONB, triggers |
+| Pooling | PgBouncer (transaction mode) | Thousands of app connections → ~20 DB connections |
+
+Full design: **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** (app flow, data model, security, scaling, storage, performance).
+
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env.local          # fill BETTER_AUTH_SECRET (openssl rand -base64 32)
+docker compose up -d postgres       # Postgres 16 on :5432
+npm install
+npm run db:migrate                  # schema, RLS, roles, coach views, instruments
+npm run dev                         # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Emails (verification codes, magic links) print to the terminal until `RESEND_API_KEY` is set.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| | |
+|---|---|
+| `npm run dev` / `build` / `start` | Next.js |
+| `npm test` | Vitest (rules engine, P&L maths) |
+| `npm run typecheck` / `lint` | TypeScript, ESLint |
+| `npm run db:generate` / `db:migrate` | Drizzle migrations |
 
-## Learn More
+## Deploy
 
-To learn more about Next.js, take a look at the following resources:
+`Dockerfile` builds a standalone image (non-root, healthcheck at `/api/health`). See the hosting section of the architecture doc for where to run it. For Indian users, keep the app and database in an India region.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Status
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Screen (Figma) | Status |
+|---|---|
+| Sign in, sign up, verify, reset | ✅ |
+| Dashboard | ✅ |
+| New trade (with rules) | ✅ |
+| Journal | ✅ |
+| Settings: account, rules, override, export | ✅ |
+| Trade review, Performance, Weekly review, Calendar, Playbook, Import, Coach, Search | Next |
