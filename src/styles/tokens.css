@@ -60,6 +60,16 @@
   --loss-2: #fadadb;
   --loss-3: #f5bdbf;
 
+  /* Chart marks — validated for colorblind separation, chroma and contrast
+     (dataviz validator, light surface). Text keeps the *-text tokens above.
+     Grade order is fixed: earned, lucky, good loss, deserved (keeps orange away from red). */
+  --chart-profit: #0e9488;
+  --chart-loss: #e0484d;
+  --chart-earned: #0e9488;
+  --chart-lucky: #c2740a;
+  --chart-goodloss: #2563eb;
+  --chart-deserved: #e0484d;
+
   /* Outcome & status (process grades) */
   --lucky: #d88a13;
   --lucky-subtle: #fbf1dc;
@@ -124,6 +134,13 @@
   --loss-1: #33201f;
   --loss-2: #422527;
   --loss-3: #552c2f;
+
+  --chart-profit: #14a898;
+  --chart-loss: #e0565b;
+  --chart-earned: #14a898;
+  --chart-lucky: #b97a1c;
+  --chart-goodloss: #4f8ff0;
+  --chart-deserved: #e0565b;
 
   --lucky: #e0a54a;
   --lucky-subtle: #352a18;
