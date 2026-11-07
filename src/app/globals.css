@@ -1,26 +1,89 @@
 @import "tailwindcss";
+@import "../styles/tokens.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* Expose tokens to Tailwind so components use semantic names (bg-card, text-secondary…) — never raw hex. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --color-page: var(--surface-page);
+  --color-card: var(--surface-card);
+  --color-subtle: var(--surface-subtle);
+  --color-raised: var(--surface-raised);
+  --color-line: var(--border-default);
+  --color-line-subtle: var(--border-subtle);
+  --color-line-hover: var(--border-hover);
+
+  --color-fg: var(--text-primary);
+  --color-fg-2: var(--text-secondary);
+  --color-fg-3: var(--text-tertiary);
+  --color-placeholder: var(--text-placeholder);
+  --color-focus: var(--focus);
+
+  --color-citron: var(--citron-400);
+  --color-citron-50: var(--citron-50);
+  --color-citron-100: var(--citron-100);
+  --color-citron-200: var(--citron-200);
+  --color-citron-700: var(--citron-700);
+  --color-citron-900: var(--citron-900);
+
+  --color-profit: var(--profit-text);
+  --color-profit-mark: var(--profit-mark);
+  --color-profit-subtle: var(--profit-subtle);
+  --color-loss: var(--loss-text);
+  --color-loss-mark: var(--loss-mark);
+  --color-loss-subtle: var(--loss-subtle);
+  --color-lucky: var(--lucky);
+  --color-lucky-subtle: var(--lucky-subtle);
+  --color-goodloss: var(--goodloss);
+  --color-goodloss-subtle: var(--goodloss-subtle);
+  --color-danger: var(--danger);
+
+  --color-nav: var(--nav-background);
+  --color-nav-active: var(--nav-active);
+  --color-nav-fg: var(--nav-text);
+  --color-nav-muted: var(--nav-muted);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--surface-page);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100dvh;
+  font-feature-settings: "cv11", "ss01";
+}
+
+/* Money and counts always line up. */
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--citron-100);
+  color: var(--citron-900);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
