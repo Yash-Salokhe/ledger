@@ -27,4 +27,18 @@ const schema = z.object({
   PASSWORD_BREACH_CHECK: z.enum(["on", "off"]).default("on"),
 });
 
-export const env = schema.parse(process.env);
+/**
+ * `next build` imports server modules to collect route config, but secrets are
+ * only provided at runtime (docker run --env-file, compose). During the build
+ * phase we fill harmless placeholders; at runtime the real values are required.
+ */
+const isBuild = process.env.NEXT_PHASE === "phase-production-build";
+const source = isBuild
+  ? {
+      DATABASE_URL: "postgres://build:build@127.0.0.1:5432/build",
+      BETTER_AUTH_SECRET: "build-time-placeholder-not-used-at-runtime-000",
+      ...process.env,
+    }
+  : process.env;
+
+export const env = schema.parse(source);

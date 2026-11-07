@@ -6,10 +6,9 @@ import { vi } from "vitest";
  * Set TEST_DATABASE_URL (app role) and TEST_ADMIN_URL (owner, for fixtures) to enable.
  */
 export const enabled = Boolean(process.env.TEST_DATABASE_URL && process.env.TEST_ADMIN_URL);
-if (enabled) {
-  process.env.DATABASE_URL = process.env.TEST_DATABASE_URL;
-  process.env.BETTER_AUTH_SECRET ??= "test-secret-test-secret-test-secret-123";
-}
+// Without a database, pure helpers in these files still run; the client below never connects.
+process.env.DATABASE_URL = enabled ? process.env.TEST_DATABASE_URL : "postgres://unused@127.0.0.1:1/unused";
+process.env.BETTER_AUTH_SECRET ??= "test-secret-test-secret-test-secret-123";
 
 export const current = { userId: "" };
 

@@ -33,15 +33,19 @@ Full design: **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** (app flow, data mo
 
 ## Run locally
 
+Needs [Node.js 22](https://nodejs.org) and [Docker Desktop](https://www.docker.com/products/docker-desktop/). Works the same in PowerShell, macOS and Linux.
+
 ```bash
-cp .env.example .env.local          # fill BETTER_AUTH_SECRET (openssl rand -base64 32)
+git clone https://github.com/Yash-Salokhe/ledger && cd ledger
+cp .env.example .env.local          # PowerShell: copy .env.example .env.local
+                                    # then set BETTER_AUTH_SECRET to any 32+ character random string
 docker compose up -d postgres       # Postgres 16 on :5432
 npm install
 npm run db:migrate                  # schema, RLS, roles, coach views, instruments
 npm run dev                         # http://localhost:3000
 ```
 
-Emails (verification codes, magic links) print to the terminal until `RESEND_API_KEY` is set.
+Sign up, then copy the 6-digit verification code from the terminal: emails print there until `RESEND_API_KEY` is set. Set `PASSWORD_BREACH_CHECK=off` if you're offline.
 
 ## Scripts
 
@@ -56,7 +60,7 @@ Emails (verification codes, magic links) print to the terminal until `RESEND_API
 
 ## Deploy
 
-`Dockerfile` builds a standalone image (non-root, healthcheck at `/api/health`). See the hosting section of the architecture doc for where to run it. For Indian users, keep the app and database in an India region.
+One command brings up Postgres, migrations, the app and HTTPS (Caddy + Let's Encrypt) on any Linux server. Step-by-step for an IONOS VPS: [deploy/README.md](deploy/README.md). For lakhs of Indian users, run the app and database in an India region.
 
 ## Status
 

@@ -1,5 +1,6 @@
 # Production image (works on any Docker host: IONOS VPS, AWS ECS/Fargate, DigitalOcean, Fly…)
 # Build: docker build -t ledger .   Run: docker run -p 3000:3000 --env-file .env ledger
+# Full stack on one server (Postgres + migrations + app + HTTPS): see deploy/README.md
 
 FROM node:22-alpine AS deps
 WORKDIR /app
@@ -12,6 +13,15 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
+
+# One-shot migration job: `docker build --target migrate -t ledger-migrate .`
+FROM node:22-alpine AS migrate
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY package.json ./
+COPY scripts/migrate.mjs ./scripts/migrate.mjs
+COPY db/migrations ./db/migrations
+CMD ["node", "scripts/migrate.mjs"]
 
 FROM node:22-alpine AS run
 WORKDIR /app
