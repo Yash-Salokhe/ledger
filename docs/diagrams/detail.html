@@ -1,0 +1,35 @@
+<style>
+.ld{font-family:var(--font-sans);color:var(--text-primary);padding:8px 0;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.ld .frame{border:1px dashed var(--border-stronger);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.ld .lbl{font-size:12px;color:var(--text-secondary);display:flex;align-items:center;gap:6px;margin:0 2px 2px}
+.ld .box{border:0.5px solid var(--border-strong);background:var(--surface-1);border-radius:10px;padding:9px 11px;display:flex;gap:10px;align-items:flex-start}
+.ld .ic{flex:none;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-size:17px;background:var(--surface-0);border:0.5px solid var(--border);color:var(--text-primary)}
+.ld .db .ic,.ld .st.db .dot{background:var(--bg-success);color:var(--text-success);border-color:var(--border-success)}
+.ld .t{font-size:13.5px;font-weight:500;line-height:1.3}.ld .s{font-size:12px;color:var(--text-secondary);line-height:1.45}
+.ld code{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-0);border:0.5px solid var(--border);border-radius:4px;padding:0 4px}
+.ld .tl{position:relative;align-self:start;display:flex;flex-direction:column;gap:9px;padding-left:4px}
+.ld .tl::before{content:"";position:absolute;left:18px;top:48px;bottom:22px;width:1.5px;background:var(--border-stronger)}
+.ld .st{display:flex;gap:10px;align-items:flex-start;position:relative}
+.ld .dot{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:15px;background:var(--surface-1);border:0.5px solid var(--border-strong);color:var(--text-primary)}
+</style>
+<div class="ld">
+<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Ledger detailed architecture: the four Docker containers on the server, and the seven steps of logging a trade.</h2>
+<div class="frame">
+<div class="lbl"><i class="ti ti-server-2" aria-hidden="true"></i>One VPS · Docker Compose</div>
+<div class="box"><div class="ic"><i class="ti ti-lock" aria-hidden="true"></i></div><div><div class="t">caddy</div><div class="s">Only public door, ports 80/443. Let's Encrypt certs.</div></div></div>
+<div class="box"><div class="ic"><i class="ti ti-brand-nextjs" aria-hidden="true"></i></div><div><div class="t">app</div><div class="s">Next.js standalone, non-root. Connects as <code>app_login</code>.</div></div></div>
+<div class="box"><div class="ic"><i class="ti ti-arrows-sort" aria-hidden="true"></i></div><div><div class="t">migrate</div><div class="s">Runs each deploy, then exits. Tables, RLS, roles.</div></div></div>
+<div class="box db"><div class="ic"><i class="ti ti-database" aria-hidden="true"></i></div><div><div class="t">postgres</div><div class="s">Private network only. Data in the <code>pgdata</code> volume.</div></div></div>
+<div class="lbl" style="margin-top:4px"><i class="ti ti-key" aria-hidden="true"></i>Roles: owner · <code>app_login</code> · <code>coach_login</code></div>
+</div>
+<div class="tl">
+<div class="lbl"><i class="ti ti-route" aria-hidden="true"></i>Logging a trade, end to end</div>
+<div class="st"><div class="dot"><i class="ti ti-cookie" aria-hidden="true"></i></div><div><div class="t">Proxy check</div><div class="s">No session cookie, straight to sign-in</div></div></div>
+<div class="st"><div class="dot"><i class="ti ti-user-check" aria-hidden="true"></i></div><div><div class="t">Verify session</div><div class="s">Better Auth, email must be verified</div></div></div>
+<div class="st"><div class="dot"><i class="ti ti-scale" aria-hidden="true"></i></div><div><div class="t">Check your rules</div><div class="s">Max trades a day, risk, trading hours</div></div></div>
+<div class="st"><div class="dot"><i class="ti ti-id-badge-2" aria-hidden="true"></i></div><div><div class="t">Scope to you</div><div class="s">Transaction sets <code>app.user_id</code></div></div></div>
+<div class="st db"><div class="dot"><i class="ti ti-lock-square" aria-hidden="true"></i></div><div><div class="t">Insert under RLS</div><div class="s">Only your rows are reachable</div></div></div>
+<div class="st db"><div class="dot"><i class="ti ti-calendar-stats" aria-hidden="true"></i></div><div><div class="t">Trigger rolls up</div><div class="s">Daily P&amp;L and trade count updated</div></div></div>
+<div class="st"><div class="dot"><i class="ti ti-refresh" aria-hidden="true"></i></div><div><div class="t">Screen refreshes</div><div class="s">Dashboard re-streams, no reload</div></div></div>
+</div>
+</div>

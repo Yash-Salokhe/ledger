@@ -19,6 +19,20 @@ A trading journal that grades your **process**, not just your P&L. Log trades fr
 - **Any market.** Instruments carry their exchange (ISO 10383), asset class, currency and lot size. Each trading account has its own currency; INR uses lakh grouping.
 - **Ledger Coach** (in progress): an AI that reads your journal through read-only views and answers questions like "Why did September lose?".
 
+## Architecture
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/architecture-overview-dark.png">
+  <img alt="Ledger architecture overview: traders, Caddy edge, Next.js app, PostgreSQL with row-level security, outside services and the planned Ledger Coach" src="docs/architecture-overview-light.png" width="720">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/architecture-detail-dark.png">
+  <img alt="Inside the server (caddy, app, migrate, postgres containers) and the seven steps of logging a trade" src="docs/architecture-detail-light.png" width="720">
+</picture>
+
+Full write-up, data model and scaling plan: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
 ## Stack
 
 | Layer | Choice | Why |
