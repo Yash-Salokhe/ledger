@@ -72,4 +72,5 @@ Emails (verification codes, magic links) print to the terminal until `RESEND_API
 | Weekly review (rules broken + overrides with reasons, reflection autosave, last week's focus) | ✅ |
 | CSV import (MetaTrader 5, Zerodha tradebook with FIFO pairing, any CSV with column mapping) | ✅ |
 | ⌘K search (trades by market or note words, strategies, pages) | ✅ |
-| Broker API sync, Ledger Coach + MCP | Next |
+| Guided tour for new accounts, phone layout | ✅ |
+| Broker API sync, Ledger Coach + MCP, screenshot uploads | Next |

@@ -42,7 +42,7 @@ function Bar({ path }: { path: string | null }) {
             const active = path?.startsWith(href) ?? false;
             return (
               <li key={href}>
-                <Link href={href} aria-current={active ? "page" : undefined}
+                <Link href={href} aria-current={active ? "page" : undefined} data-tour={`nav-${href.slice(1)}`}
                   className={`relative flex h-16 flex-col items-center justify-center gap-1 text-[11px] font-medium ${active ? "text-white" : "text-nav-muted"}`}>
                   {active ? <motion.span layoutId="tab-dot" className="absolute top-1.5 h-1 w-6 rounded-full bg-citron" transition={{ type: "spring", stiffness: 500, damping: 38 }} /> : null}
                   <Icon size={20} aria-hidden />{label}
@@ -51,7 +51,7 @@ function Bar({ path }: { path: string | null }) {
             );
           })}
           <li>
-            <button type="button" onClick={() => setOpen(true)} aria-expanded={open} aria-haspopup="dialog"
+            <button type="button" onClick={() => setOpen(true)} aria-expanded={open} aria-haspopup="dialog" data-tour="nav-settings"
               className={`relative flex h-16 w-full flex-col items-center justify-center gap-1 text-[11px] font-medium ${moreActive ? "text-white" : "text-nav-muted"}`}>
               {moreActive ? <span className="absolute top-1.5 h-1 w-6 rounded-full bg-citron" /> : null}
               <Menu size={20} aria-hidden />More

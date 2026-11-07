@@ -9,6 +9,8 @@ import { ToastProvider } from "@/components/app/toast";
 import { MobileNav } from "@/components/app/mobile-nav";
 import { CommandPalette } from "@/components/app/command-palette";
 import { SearchButton } from "@/components/app/search-button";
+import { Tour } from "@/components/app/tour";
+import { getTourSeen } from "@/lib/data/bootstrap";
 import { LedgerMark } from "@/components/ledger-mark";
 import Link from "next/link";
 
@@ -42,9 +44,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 async function HeaderActions() {
   const { user } = await requireSession();
   await ensureProfile(user.id);
-  const gate = await getTradeGate(user.id);
+  const [gate, tourSeen] = await Promise.all([getTradeGate(user.id), getTourSeen(user.id)]);
   return (
     <>
+      <Tour seen={tourSeen} />
       <NewTradeButton canTrade={gate.canTrade} lockReason={gate.lockReason} findings={gate.findings} />
       <UserMenu name={user.name} detail={user.email} />
     </>

@@ -33,7 +33,7 @@ export function Sidebar({ ungraded = 0 }: { ungraded?: number }) {
       </Suspense>
 
       <div className="mt-auto flex flex-col gap-2">
-        <Link href="/settings" className="flex h-10 items-center gap-3 rounded-[10px] px-2.5 text-sm text-nav-muted hover:text-nav-fg">
+        <Link href="/settings" data-tour="nav-settings" className="flex h-10 items-center gap-3 rounded-[10px] px-2.5 text-sm text-nav-muted hover:text-nav-fg">
           <Settings size={17} aria-hidden /> Settings
         </Link>
         <ThemeToggle />
@@ -56,7 +56,7 @@ function NavList({ path, ungraded }: { path: string | null; ungraded: number }) 
                 {active ? (
                   <motion.span layoutId="nav-active" className="absolute inset-0 rounded-[10px] bg-nav-active" transition={{ type: "spring", stiffness: 500, damping: 40 }} />
                 ) : null}
-                <Link href={href} aria-current={active ? "page" : undefined}
+                <Link href={href} aria-current={active ? "page" : undefined} data-tour={`nav-${href.slice(1)}`}
                   className={`relative flex h-10 items-center gap-3 whitespace-nowrap rounded-[10px] px-2.5 text-sm transition-colors ${active ? "text-white" : "text-nav-muted hover:text-nav-fg"}`}>
                   <Icon size={17} aria-hidden />
                   <span className="flex-1">{label}</span>

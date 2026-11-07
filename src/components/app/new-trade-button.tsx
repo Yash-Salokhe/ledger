@@ -30,6 +30,7 @@ export function NewTradeButton({ canTrade, lockReason, findings }: { canTrade: b
         onClick={onClick}
         whileTap={{ scale: 0.97 }}
         aria-disabled={!canTrade}
+        data-tour="new-trade"
         title={lockReason}
         className={`flex h-10 items-center gap-2 rounded-md px-4 text-sm font-semibold transition-colors ${
           canTrade ? "bg-citron text-[#141413] hover:brightness-[0.97]" : "cursor-not-allowed bg-subtle text-fg-3"

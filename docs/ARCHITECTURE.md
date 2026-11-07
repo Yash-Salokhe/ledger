@@ -318,13 +318,16 @@ What we do instead: optimistic UI, retry on flaky networks, and clear "couldn't 
 
 | Area | Status |
 |---|---|
-| Design tokens from Figma Foundations (light and dark) | ✅ |
+| Design tokens from Figma Foundations (light and dark) + validated chart tokens | ✅ |
 | Auth: email/password, Google, Apple, magic link, passkeys, email codes, reset, delete | ✅ |
 | Schema, RLS, roles, Coach views, roll-up trigger, instruments | ✅ verified |
-| Rules engine with override and violations | ✅ 20 unit tests + end-to-end |
-| Dashboard, New trade, Journal (undo), Settings, export | ✅ |
+| Rules engine with override and violations | ✅ unit + DB tests |
+| Dashboard, New trade, Journal (undo, day filter), Trade review, Settings, export | ✅ |
+| Playbook + strategy detail (per-step stats), Calendar, Performance, Weekly review | ✅ |
+| CSV import (MetaTrader 5, Zerodha tradebook with FIFO pairing, generic CSV) | ✅ |
+| ⌘K search, guided tour, phone layout with bottom tab bar | ✅ |
 | Docker image, security headers, health check | ✅ |
-| Trade review, Performance, Weekly review, Calendar, Playbook, ⌘K search | Next |
-| CSV import (MT5, Zerodha, IBKR, generic), broker API sync | Next |
-| Ledger Coach (Claude) + MCP server | Next |
-| Guided tour, mobile 390 layouts | Next |
+| Tests: 35 unit + 26 DB integration (real Postgres, app role, RLS on) | ✅ |
+| Broker API sync (Zerodha Kite, Upstox, IBKR…) — needs broker app credentials | Next |
+| Ledger Coach (Claude) + MCP server on the coach.* views | Next |
+| Screenshot uploads + chart lightbox (needs object storage) | Next |
