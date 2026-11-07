@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-import { Search } from "lucide-react";
 import { requireSession } from "@/lib/session";
 import { ensureProfile } from "@/lib/data/bootstrap";
 import { getTradeGate } from "@/lib/data/gate";
@@ -8,6 +7,8 @@ import { NewTradeButton } from "@/components/app/new-trade-button";
 import { UserMenu } from "@/components/app/user-menu";
 import { ToastProvider } from "@/components/app/toast";
 import { MobileNav } from "@/components/app/mobile-nav";
+import { CommandPalette } from "@/components/app/command-palette";
+import { SearchButton } from "@/components/app/search-button";
 import { LedgerMark } from "@/components/ledger-mark";
 import Link from "next/link";
 
@@ -24,11 +25,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="flex items-center justify-end gap-3 px-4 pt-4 md:px-10 md:pt-6">
           <Link href="/dashboard" aria-label="Ledger home" className="mr-auto md:hidden"><LedgerMark size={28} /></Link>
-          <button type="button" className="hidden h-10 w-full max-w-[280px] items-center gap-2 sm:flex rounded-md border border-line bg-card px-3 text-sm text-fg-3 hover:border-line-hover">
-            <Search size={16} aria-hidden />
-            <span className="flex-1 text-left">Search trades, plans, pages</span>
-            <kbd className="rounded border border-line px-1.5 text-[11px]">⌘K</kbd>
-          </button>
+          <SearchButton />
           <Suspense fallback={<HeaderSkeleton />}>
             <HeaderActions />
           </Suspense>
@@ -36,6 +33,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <main className="flex-1 px-4 pb-28 pt-2 md:px-10 md:pb-12">{children}</main>
       </div>
       <MobileNav />
+      <CommandPalette />
     </div>
     </ToastProvider>
   );

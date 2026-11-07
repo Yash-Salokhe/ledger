@@ -71,4 +71,5 @@ Emails (verification codes, magic links) print to the terminal until `RESEND_API
 | Playbook + strategy detail, Calendar, Performance | ✅ |
 | Weekly review (rules broken + overrides with reasons, reflection autosave, last week's focus) | ✅ |
 | CSV import (MetaTrader 5, Zerodha tradebook with FIFO pairing, any CSV with column mapping) | ✅ |
-| Broker API sync, ⌘K search, Ledger Coach + MCP | Next |
+| ⌘K search (trades by market or note words, strategies, pages) | ✅ |
+| Broker API sync, Ledger Coach + MCP | Next |
