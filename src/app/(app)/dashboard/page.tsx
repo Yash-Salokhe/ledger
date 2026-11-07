@@ -111,7 +111,7 @@ async function DashboardContent() {
               <ul className="divide-y divide-line-subtle">
                 {d.recent.map((t) => (
                   <li key={t.id} className="flex items-center gap-4 py-3">
-                    <span className="w-24 font-semibold">{t.symbol}</span>
+                    <Link href={`/trades/${t.id}`} className="w-24 font-semibold underline-offset-4 hover:underline">{t.symbol}</Link>
                     <span className="w-14 text-sm capitalize text-fg-3">{t.side}</span>
                     <span className="flex-1 text-sm text-fg-3">{new Date(t.openedAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>
                     {t.grade ? <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${GRADE[t.grade].cls}`}>{GRADE[t.grade].label}</span>

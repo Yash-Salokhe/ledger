@@ -40,7 +40,8 @@ Emails (verification codes, magic links) print to the terminal until `RESEND_API
 | | |
 |---|---|
 | `npm run dev` / `build` / `start` | Next.js |
-| `npm test` | Vitest (rules engine, P&L maths) |
+| `npm test` | Unit tests (rules engine, P&L maths) |
+| `npm run test:db` | Integration tests against Postgres with RLS (server actions, rules, concurrency, isolation) |
 | `npm run typecheck` / `lint` | TypeScript, ESLint |
 | `npm run db:generate` / `db:migrate` | Drizzle migrations |
 
@@ -57,4 +58,5 @@ Emails (verification codes, magic links) print to the terminal until `RESEND_API
 | New trade (with rules) | ✅ |
 | Journal | ✅ |
 | Settings: account, rules, override, export | ✅ |
-| Trade review, Performance, Weekly review, Calendar, Playbook, Import, Coach, Search | Next |
+| Trade review (grade, checklist, emotions, notes autosave, edit numbers, chart link) | ✅ |
+| Performance, Weekly review, Calendar, Playbook, Import, Coach, Search | Next |

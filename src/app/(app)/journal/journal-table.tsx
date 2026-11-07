@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useOptimistic, useRef, useState, useTransition } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { Trash2 } from "lucide-react";
@@ -66,9 +67,9 @@ export function JournalTable({ rows }: { rows: Row[] }) {
           <tbody>
             <AnimatePresence initial={false}>
               {visible.map((r) => (
-                <motion.tr key={r.id} layout exit={{ opacity: 0, x: -12, transition: { duration: 0.18 } }} className="group border-b border-line-subtle last:border-0 hover:bg-[var(--row-hover)]">
+                <motion.tr key={r.id} layout exit={{ opacity: 0, x: -12, transition: { duration: 0.18 } }} className="group relative border-b border-line-subtle last:border-0 hover:bg-[var(--row-hover)]">
                   <td className="num whitespace-nowrap px-4 py-3 text-fg-2">{new Date(r.openedAt).toLocaleString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}</td>
-                  <td className="px-4 py-3"><span className="font-semibold">{r.symbol}</span> <span className="text-xs text-fg-3">{r.exchange}</span></td>
+                  <td className="px-4 py-3"><Link href={`/trades/${r.id}`} className="font-semibold underline-offset-4 after:absolute after:inset-0 hover:underline">{r.symbol}</Link> <span className="text-xs text-fg-3">{r.exchange}</span></td>
                   <td className="px-4 py-3">{r.side === "long" ? "Buy" : "Sell"}</td>
                   <td className="px-4 py-3 text-fg-2">{r.strategy ?? "—"}</td>
                   <td className="px-4 py-3">
@@ -79,7 +80,7 @@ export function JournalTable({ rows }: { rows: Row[] }) {
                   <td className={`num px-4 py-3 text-right font-semibold ${r.pnl === null ? "" : r.pnl >= 0 ? "text-profit" : "text-loss"}`}>{r.pnl === null ? "—" : money(r.pnl, r.currency, { sign: true })}</td>
                   <td className="px-2 py-3 text-right">
                     <button type="button" onClick={() => setConfirm(r)} aria-label={`Delete ${r.symbol} trade`}
-                      className="flex size-9 items-center justify-center rounded-md text-fg-3 opacity-0 transition-opacity hover:bg-loss-subtle hover:text-loss focus-visible:opacity-100 group-hover:opacity-100">
+                      className="relative z-10 flex size-9 items-center justify-center rounded-md text-fg-3 opacity-0 transition-opacity hover:bg-loss-subtle hover:text-loss focus-visible:opacity-100 group-hover:opacity-100">
                       <Trash2 size={16} aria-hidden />
                     </button>
                   </td>
