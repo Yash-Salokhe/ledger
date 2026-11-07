@@ -6,13 +6,14 @@ const themes = {
 };
 const browser = await chromium.launch({ executablePath: "/usr/bin/google-chrome" });
 const page = await browser.newPage({ deviceScaleFactor: 2, viewport: { width: 760, height: 800 } });
-for (const name of ["overview", "detail"]) for (const [mode, vars] of Object.entries(themes)) {
+for (const name of ["illustration", "overview", "detail"]) for (const [mode, vars] of Object.entries(themes)) {
   const html = `<!doctype html><html><head><link rel="stylesheet" href="file:///tmp/arch/node_modules/@tabler/icons-webfont/dist/tabler-icons.min.css"><style>
   :root{${vars}--font-sans:Inter,"Segoe UI",system-ui,sans-serif;--font-mono:ui-monospace,Menlo,monospace}
   body{margin:0;background:var(--page)} #w{width:700px;padding:26px 30px 22px}
   .cap{font:500 15px var(--font-sans);color:var(--text-primary);margin:0 0 12px;display:flex;gap:8px;align-items:center}
+  svg .th{font-size:14px;font-weight:500;fill:var(--text-primary)} svg .ts{font-size:12px;fill:var(--text-secondary)} svg text{font-family:var(--font-sans)}
   .cap span{font-weight:400;color:var(--text-secondary);font-size:13px}</style></head>
-  <body><div id="w"><div class="cap">Ledger <span>${name === "overview" ? "· architecture overview" : "· inside the server and the life of a trade"}</span></div>${readFileSync(`/tmp/arch/${name}.html`, "utf8")}</div></body></html>`;
+  <body><div id="w"><div class="cap">Ledger <span>${{illustration:"· how it all fits together", overview:"· architecture overview", detail:"· inside the server and the life of a trade"}[name]}</span></div>${readFileSync(`/tmp/arch/${name}.html`, "utf8")}</div></body></html>`;
   writeFileSync("/tmp/arch/page.html", html);
   await page.goto("file:///tmp/arch/page.html", { waitUntil: "networkidle" });
   await page.addStyleTag({ content: "*{animation:none!important}" });

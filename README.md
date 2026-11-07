@@ -22,6 +22,11 @@ A trading journal that grades your **process**, not just your P&L. Log trades fr
 ## Architecture
 
 <picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/architecture-illustration-dark.png">
+  <img alt="Illustration: traders on a laptop and phone connect over HTTPS to one server rack holding Caddy, the Next.js app, Postgres and the migrate job; Postgres stores data on the pgdata volume; email and sign-in go to outside services; a planned Ledger Coach reads Postgres read-only" src="docs/architecture-illustration-light.png" width="720">
+</picture>
+
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/architecture-overview-dark.png">
   <img alt="Ledger architecture overview: traders, Caddy edge, Next.js app, PostgreSQL with row-level security, outside services and the planned Ledger Coach" src="docs/architecture-overview-light.png" width="720">
 </picture>
