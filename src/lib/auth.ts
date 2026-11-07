@@ -39,6 +39,8 @@ export const auth = betterAuth({
     },
   },
   emailVerification: { autoSignInAfterVerification: true },
+  // Right to erasure (DPDP / GDPR). Requires a sign-in within `freshAge`; cascades delete all journal data.
+  user: { deleteUser: { enabled: true } },
   socialProviders: social,
   account: { accountLinking: { enabled: true, trustedProviders: ["google", "apple"] } },
 
