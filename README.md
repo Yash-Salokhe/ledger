@@ -69,4 +69,5 @@ Emails (verification codes, magic links) print to the terminal until `RESEND_API
 | Settings: account, rules, override, export | ✅ |
 | Trade review (grade, checklist, emotions, notes autosave, edit numbers, chart link) | ✅ |
 | Playbook + strategy detail, Calendar, Performance | ✅ |
-| Weekly review, Import, Coach, Search | Next |
+| Weekly review (rules broken + overrides with reasons, reflection autosave, last week's focus) | ✅ |
+| CSV import, broker sync, ⌘K search, Ledger Coach + MCP | Next |
