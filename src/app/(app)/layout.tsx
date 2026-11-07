@@ -6,6 +6,7 @@ import { getTradeGate } from "@/lib/data/gate";
 import { Sidebar } from "@/components/app/sidebar";
 import { NewTradeButton } from "@/components/app/new-trade-button";
 import { UserMenu } from "@/components/app/user-menu";
+import { ToastProvider } from "@/components/app/toast";
 
 /**
  * The shell (sidebar, search, page headings) is static and prerendered, so every
@@ -14,6 +15,7 @@ import { UserMenu } from "@/components/app/user-menu";
  */
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
+    <ToastProvider>
     <div className="flex min-h-dvh flex-col bg-page md:flex-row">
       <Sidebar />
       <div className="flex min-w-0 flex-1 flex-col">
@@ -30,6 +32,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <main className="flex-1 px-6 pb-12 pt-2 md:px-10">{children}</main>
       </div>
     </div>
+    </ToastProvider>
   );
 }
 

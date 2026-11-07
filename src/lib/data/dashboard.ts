@@ -46,6 +46,7 @@ export async function getDashboard(userId: string) {
 
     return {
       account: { id: account.id, name: account.name, currency: account.currency },
+      isDemo: account.isDemoData,
       opening,
       balance: opening + net,
       changePct: opening ? (net / opening) * 100 : 0,

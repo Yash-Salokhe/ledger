@@ -71,7 +71,7 @@ export function evaluate(rules: Rule[], day: DayContext, proposed: ProposedTrade
             ...base,
             title: `You've taken ${day.tradesToday} of ${n} trades today`,
             message: overridden
-              ? `You unlocked this for today. Any trade now breaks your own ${n}-trades-a-day rule and will be flagged in your weekly review.`
+              ? `You unlocked this for today. Any trade now breaks your own ${n}-trade${n === 1 ? "" : "s"}-a-day rule and will be flagged in your weekly review.`
               : `Your rule is ${n} trade${n === 1 ? "" : "s"} a day. New trades unlock tomorrow, or you can override the rule in Settings.`,
           });
         }

@@ -6,6 +6,7 @@ import { requireSession } from "@/lib/session";
 import { getDashboard } from "@/lib/data/dashboard";
 import { linePath, money, pct, signed } from "@/lib/format";
 import { Reveal } from "@/components/app/reveal";
+import { loadSampleJournal } from "@/lib/actions/trades";
 
 export const metadata: Metadata = { title: "Dashboard" };
 
@@ -50,6 +51,12 @@ async function DashboardContent() {
     <>
       {!d || d.trades === 0 ? <EmptyState hasAccount={Boolean(d)} /> : (
         <>
+          {d.isDemo ? (
+            <p className="rounded-lg bg-citron-50 px-4 py-3 text-sm text-citron-900">
+              You&rsquo;re exploring a sample journal. It disappears when you log your first real trade.{" "}
+              <Link href="/trades/new" className="font-semibold underline underline-offset-4">Log a trade</Link>
+            </p>
+          ) : null}
           {d.byInstrument.length ? (
             <div className="flex flex-wrap items-center gap-2 text-sm">
               <span className="font-semibold">P&amp;L by market</span>
@@ -147,6 +154,9 @@ function EmptyState({ hasAccount }: { hasAccount: boolean }) {
       <div className="flex flex-wrap gap-3">
         <Link href="/trades/new" className="flex h-11 items-center gap-2 rounded-md bg-citron px-4 text-sm font-semibold text-[#141413]"><Plus size={16} aria-hidden />Log a trade</Link>
         <Link href="/import" className="flex h-11 items-center gap-2 rounded-md border border-line px-4 text-sm font-semibold"><FileUp size={16} aria-hidden />Import trades</Link>
+        <form action={loadSampleJournal}>
+          <button type="submit" className="flex h-11 items-center rounded-md px-4 text-sm font-semibold underline underline-offset-4">Explore with sample data</button>
+        </form>
       </div>
     </section>
   );
